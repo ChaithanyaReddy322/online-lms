@@ -1,12 +1,10 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-const COURSE_PROGRESS_API = "http://localhost:8080/api/v1/progress";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { axiosBaseQuery } from "./axiosBaseQuery";
 
 export const courseProgressApi = createApi({
   reducerPath: "courseProgressApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: COURSE_PROGRESS_API,
-    credentials: "include",
+  baseQuery: axiosBaseQuery({
+    baseUrl: "/api/v1/progress",
   }),
   endpoints: (builder) => ({
     getCourseProgress: builder.query({

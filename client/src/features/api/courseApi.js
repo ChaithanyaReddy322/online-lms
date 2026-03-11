@@ -1,13 +1,11 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-const COURSE_API = "http://localhost:8080/api/v1/course";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { axiosBaseQuery } from "./axiosBaseQuery";
 
 export const courseApi = createApi({
   reducerPath: "courseApi",
   tagTypes: ["Refetch_Creator_Course", "Refetch_Lecture"],
-  baseQuery: fetchBaseQuery({
-    baseUrl: COURSE_API,
-    credentials: "include",
+  baseQuery: axiosBaseQuery({
+    baseUrl: "/api/v1/course",
   }),
   endpoints: (builder) => ({
     createCourse: builder.mutation({

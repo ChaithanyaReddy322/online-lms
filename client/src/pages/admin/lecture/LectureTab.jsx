@@ -15,13 +15,13 @@ import {
   useGetLectureByIdQuery,
   useRemoveLectureMutation,
 } from "@/features/api/courseApi";
-import axios from "axios";
+import API from "@/lib/api";
 import { Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 
-const MEDIA_API = "http://localhost:8080/api/v1/media";
+
 
 const LectureTab = () => {
   const { courseId, lectureId } = useParams();
@@ -60,7 +60,7 @@ const LectureTab = () => {
     setMediaProgress(true);
 
     try {
-      const res = await axios.post(`${MEDIA_API}/upload-video`, formData, {
+      const res = await API.post(`/api/v1/media/upload-video`, formData, {
         onUploadProgress: ({ loaded, total }) => {
           setUploadProgress(Math.round((loaded * 100) / total));
         },
