@@ -11,30 +11,34 @@ import courseProgressRoute from "./routes/courseProgress.route.js";
 
 dotenv.config({});
 
-// call database connection here
+// database connection
 connectDB();
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-// default middleware
+// middleware
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors({
-    origin:"http://localhost:5173",
-    credentials:true
-}));
- 
-// apis
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://online-lms-kohl.vercel.app"
+    ],
+    credentials: true
+  })
+);
+
+// routes
 app.use("/api/v1/media", mediaRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/course", courseRoute);
 app.use("/api/v1/purchase", purchaseRoute);
 app.use("/api/v1/progress", courseProgressRoute);
- 
- 
-app.listen(PORT, () => {
-    console.log(`Server listen at port ${PORT}`);
-})
 
+app.listen(PORT, () => {
+  console.log(`Server listen at port ${PORT}`);
+});
